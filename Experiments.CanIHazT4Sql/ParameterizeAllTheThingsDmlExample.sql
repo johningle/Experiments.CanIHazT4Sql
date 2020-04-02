@@ -9,4 +9,4 @@ ParameterizeAllTheThingsDmlExample.sql
 
 DELETE
 FROM [<#= DatabaseName #>].[<#= SchemaName #>].[<#= TableName #>]
-WHERE LastUpdated < '<#= CutoffDate #>'
+WHERE LastUpdated < @CutoffDate

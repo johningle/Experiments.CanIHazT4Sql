@@ -41,7 +41,7 @@ ParameterizeAllTheThingsDmlExample.sql
 
 DELETE
 FROM [{dbName}].[{schemaName}].[{tableName}]
-WHERE LastUpdated < '{cutoffDate}'
+WHERE LastUpdated < @CutoffDate
 ";
             #endregion
 

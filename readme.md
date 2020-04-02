@@ -4,6 +4,13 @@
 My goal is to use a SQL file as a runtime T4 template so that I can dynamically generate SQL with parametric replacement values.
 This is the minimum necessary proof-of-concept I've identified so far.
 
+## But Why?!
+* I shall not store SQL in C# strings!
+* I shall benefit from VS tooling for SQL files, including syntax coloring and parsing!
+* I shall factor my SQL into separate files to support composition of batch statements!
+* I shall benefit from dynamically composing SQL without using dynamic SQL in the database!
+* I shall not risk SQL injection by formatting with user-provided values!
+
 ## Steps to Success
 I used the following steps to accomplish this goal:
 
@@ -17,7 +24,8 @@ I used the following steps to accomplish this goal:
 8. Renamed the T4 Template and change the extension from tt to sql. We rename before we open and edit so that Visual Studio will recognize the file extension and give us SQL tooling, including parsing and highlighting.
 9. Open the SQL/T4 (.sql) file and add SQL comments around or in front of the T4 directives (<#@...#>) at the top. The comment will appear in the final generated string, but the T4 directives will be removed. See examples. The goal of this step is to ensure the contents of the SQL files are correctly parsable as SQL. If we did not comment the T4 directives, the SQL parser would complain about them. I used the opportunity to label the generated SQL with the filename in my comment block.
 10. Write your SQL in the new SQL/T4 file. you can use the T4 instructions however you like to generate the SQL commands that you need.
+  * Use SQL parameters everywhere you normally would to avoid SQL injection!
+  * Only use T4 replacement where you must to avoid dynamic SQL in the database!
 11. Write tests to verify the correct SQL is generated when you invoke TransformText() at runtime. As a proof of concept, I'm most interested in proving this technique works, not best practices for unit testing SQL code. The duplicated of the SQL in the tests is wholly intentional but not something I would be eager to do in production code except while debugging my T4.
 12. ???
 13. Profit!
-

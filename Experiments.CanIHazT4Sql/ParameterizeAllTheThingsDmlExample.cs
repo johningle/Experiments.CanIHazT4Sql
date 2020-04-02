@@ -50,14 +50,7 @@ namespace Experiments.CanIHazT4Sql
             
             #line default
             #line hidden
-            this.Write("]\r\nWHERE LastUpdated < \'");
-            
-            #line 12 "C:\Code\Experiments\Experiments.CanIHazT4Sql\Experiments.CanIHazT4Sql\ParameterizeAllTheThingsDmlExample.sql"
-            this.Write(this.ToStringHelper.ToStringWithCulture(CutoffDate));
-            
-            #line default
-            #line hidden
-            this.Write("\'\r\n");
+            this.Write("]\r\nWHERE LastUpdated < @CutoffDate\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
